@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style1.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+      .error-message {
+        color: red;
+        font-size: 12px;
+      }
+    </style>
+    <script>
+      function validateForm() {
+        var fullName = document.getElementById("full-name").value;
+        var dob = document.getElementById("dob").value;
+        var phoneNumber = document.getElementById("phone-number").value;
+        var cnic = document.getElementById("cnic").value;
+        var university = document.getElementById("university").value;
+        var studentId = document.getElementById("student-id").value;
+        var semester = document.getElementById("semester").value;
+        var partnerName = document.getElementById("partner-name").value;
+        var paymentProof = document.getElementById("payment-proof").value;
+
+        // Reset error messages
+        document.getElementById("full-name-error").innerText = "";
+        document.getElementById("dob-error").innerText = "";
+        document.getElementById("phone-number-error").innerText = "";
+        document.getElementById("cnic-error").innerText = "";
+        document.getElementById("university-error").innerText = "";
+        document.getElementById("student-id-error").innerText = "";
+        document.getElementById("semester-error").innerText = "";
+        document.getElementById("partner-name-error").innerText = "";
+
+        // Check if any field is empty
+        if (
+          fullName === "" ||
+          dob === "" ||
+          phoneNumber === "" ||
+          cnic === "" ||
+          university === "" ||
+          studentId === "" ||
+          semester === "" ||
+          paymentProof === ""
+        ) {
+          alert("All fields are required!");
+          return false;
+        }
+
+        // Validate Full Name (Should contain only letters and spaces)
+        var nameRegex = /^[a-zA-Z\s]+$/;
+        if (!nameRegex.test(fullName)) {
+          document.getElementById("full-name-error").innerText =
+            "Please enter a valid full name.";
+          return false;
+        }
+
+        // Validate DOB (Assuming it's in DD/MM/YYYY format)
+        var dobRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        if (!dobRegex.test(dob)) {
+          document.getElementById("dob-error").innerText =
+            "Please enter a valid date of birth in DD/MM/YYYY format.";
+          return false;
+        }
+
+        // Validate Phone Number (Assuming it's in XXXX-XXXXXXX format)
+        var phoneRegex = /^\d{4}-\d{7}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+          document.getElementById("phone-number-error").innerText =
+            "Please enter a valid phone number in XXXX-XXXXXXX format.";
+          return false;
+        }
+
+        // Validate CNIC (Assuming it's in XXXXX-XXXXXXX-X format)
+        var cnicRegex = /^\d{5}-\d{7}-\d$/;
+        if (!cnicRegex.test(cnic)) {
+          document.getElementById("cnic-error").innerText =
+            "Please enter a valid CNIC number in XXXXX-XXXXXXX-X format.";
+          return false;
+        }
+        var nameUniRegex = /^[a-zA-Z\s]+$/;
+        if (!nameUniRegex.test(university)) {
+          document.getElementById("university-error").innerText =
+            "Please enter a valid Name.";
+          return false;
+        }
+
+        // Validate Student ID (Assuming it's a numeric value)
+        var studentIdRegex = /^\d+$/;
+        if (!studentIdRegex.test(studentId)) {
+          document.getElementById("student-id-error").innerText =
+            "Please enter a valid student ID.";
+          return false;
+        }
+
+        // Validate Semester (Assuming it's a numeric value)
+        if (isNaN(semester) || semester <= 0) {
+          document.getElementById("semester-error").innerText =
+            "Please enter a valid semester.";
+          return false;
+        }
+
+        // Validate Partner Name (Optional)
+        if (partnerName !== "" && !nameRegex.test(partnerName)) {
+          document.getElementById("partner-name-error").innerText =
+            "Please enter a valid partner name or leave it blank.";
+          return false;
+        }
+
+        // Additional specific validations can be added for other fields if needed
+
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="content">
+      <div class="text">Registration</div>
+      <form action="#" onsubmit="return console.log(validateForm())">
+        <label style="position: relative; display: flex">Full Name</label>
+        <div class="field">
+          <input id="full-name" type="text" required />
+          <span class="fas fa-user"></span>
+          <label>Abdul Mateen</label>
+          <div id="full-name-error" class="error-message"></div>
+        </div>
+        <label style="position: relative; display: flex">DOB</label>
+        <div class="field">
+          <input id="dob" type="text" required />
+          <span class="fas fa-calendar-alt"></span>
+          <label>13/01/2003</label>
+          <div id="dob-error" class="error-message"></div>
+        </div>
+        <label style="position: relative; display: flex">Phone Number</label>
+        <div class="field">
+          <input id="phone-number" type="tel" required />
+          <span class="fas fa-phone"></span>
+          <label>0313-xxxxxxx</label>
+          <div id="phone-number-error" class="error-message"></div>
+        </div>
+        <label style="position: relative; display: flex">CNIC</label>
+        <div class="field">
+          <input id="cnic" type="text" required />
+          <span class="fas fa-id-card"></span>
+          <label>35202-xxxxxxx-x</label>
+          <div id="cnic-error" class="error-message"></div>
+        </div>
+        <label style="position: relative; display: flex">University</label>
+        <div class="field">
+          <input id="university" type="text" required />
+          <span class="fas fa-university"></span>
+          <label>Riphah International University</label>
+          <div id="university-error" class="error-message"></div>
+        </div>
+        <label style="position: relative; display: flex">Student ID</label>
+        <div class="field">
+          <input id="student-id" type="text" required />
+          <span class="fas fa-school"></span>
+          <label>38837</label>
+          <div id="student-id-error" class="error-message"></div>
+        </div>
+        <label style="position: relative; display: flex">Semester</label>
+        <div class="field">
+          <input id="semester" type="text" required />
+          <span class="fas fa-book-open"></span>
+          <label>6</label>
+          <div id="semester-error" class="error-message"></div>
+        </div>
+        <label style="position: relative; display: flex"
+          >Partner Name (optional)</label
+        >
+        <div class="field">
+          <input id="partner-name" type="text" />
+          <span class="fas fa-user"></span>
+          <label>Hassan Irfan</label>
+          <div id="partner-name-error" class="error-message"></div>
+        </div>
+        <label style="position: relative; display: flex">Payment Proof</label>
+        <div class="field">
+          <input id="payment-proof" type="file" accept="image/*" required />
+          <span class="fas fa-receipt"></span>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </body>
+</html>
